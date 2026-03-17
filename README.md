@@ -64,7 +64,7 @@ dotnet test tests/MultiSharp.Tests/MultiSharp.Tests.csproj
 |-------|---------|--------|
 | P0 | Fondations VSIX + Roslyn | ✅ Terminé |
 | P1 | Analyseurs + Quick Fixes | ✅ Terminé |
-| P2 | Refactorings | 🔲 Backlog |
+| P2 | Refactorings | ✅ Terminé |
 | P3 | Génération de code | 🔲 Backlog |
 | P4 | Navigation & Recherche | 🔲 Backlog |
 | P5 | Formatage & Style | 🔲 Backlog |
