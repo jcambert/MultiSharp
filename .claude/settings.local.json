@@ -1,0 +1,22 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(dotnet --version)",
+      "Bash(dotnet --list-sdks)",
+      "Read(//c/Program Files \\(x86\\)/Microsoft Visual Studio/**)",
+      "Skill(update-config)",
+      "Bash(python:*)",
+      "Bash(node:*)",
+      "Bash(cmd /c \"dir \\\\\"C:\\\\Program Files\\\\Microsoft Visual Studio\\\\2022\\\\\" /b 2>&1\")",
+      "Bash(cmd /c \"dir \\\\\"C:\\\\Program Files\\\\Microsoft Visual Studio\\\\\" /b 2>&1\")",
+      "Bash(powershell -Command \"Get-ChildItem 'C:\\\\Program Files\\\\Microsoft Visual Studio' -ErrorAction SilentlyContinue | Select Name; Get-ChildItem 'C:\\\\Program Files\\\\Microsoft Visual Studio\\\\2022' -ErrorAction SilentlyContinue | Select Name\")",
+      "Bash(powershell -Command \"Get-ChildItem 'C:\\\\Program Files\\\\Microsoft Visual Studio\\\\2022' | Select Name\")",
+      "Bash(powershell -Command \"Get-ChildItem 'C:\\\\Program Files\\\\Microsoft Visual Studio\\\\2022' -Force | Format-List Name, FullName\")",
+      "Bash(powershell -Command \"Test-Path 'C:\\\\Program Files\\\\Microsoft Visual Studio\\\\18\\\\Professional\\\\MSBuild\\\\Current\\\\Bin\\\\MSBuild.exe'\")",
+      "Bash(dotnet restore:*)",
+      "Bash(dotnet build:*)",
+      "Bash(dotnet test:*)",
+      "Bash(dotnet sln:*)"
+    ]
+  }
+}
