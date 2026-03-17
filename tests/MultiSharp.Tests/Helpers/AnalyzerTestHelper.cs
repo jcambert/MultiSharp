@@ -51,6 +51,17 @@ namespace MultiSharp.Tests.Helpers
         }
 
         /// <summary>
+        /// Vérifie qu'aucun diagnostic du type spécifié n'est produit sur le code source.
+        /// </summary>
+        public static async Task VerifyNoDiagnosticsAsync(
+            DiagnosticAnalyzer analyzer, string source, string diagnosticId)
+        {
+            var diagnostics = await GetDiagnosticsAsync(analyzer, source);
+            var count = diagnostics.Count(d => d.Id == diagnosticId);
+            Xunit.Assert.Equal(0, count);
+        }
+
+        /// <summary>
         /// Vérifie qu'exactement les diagnostics attendus sont produits (par ID).
         /// </summary>
         public static async Task VerifyDiagnosticsAsync(

@@ -14,5 +14,13 @@ namespace MultiSharp.Analyzers
         public const string MethodTooLong         = "MS0108";
         public const string TooManyParameters     = "MS0109";
         public const string NestingTooDeep        = "MS0110";
+
+        // P5 — Formatage & Style
+        public const string NamingInterfacePrefix  = "MS0501";
+        public const string NamingPascalCaseType   = "MS0502";
+        public const string NamingCamelCaseParam   = "MS0503";
+        public const string NamingPrivateField     = "MS0504";
+        public const string UseVarKeyword          = "MS0505";
+        public const string UseExpressionBody      = "MS0506";
     }
 }

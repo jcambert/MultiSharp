@@ -67,7 +67,7 @@ dotnet test tests/MultiSharp.Tests/MultiSharp.Tests.csproj
 | P2 | Refactorings | ✅ Terminé |
 | P3 | Génération de code | ✅ Terminé |
 | P4 | Navigation & Recherche | ✅ Terminé |
-| P5 | Formatage & Style | 🔲 Backlog |
+| P5 | Formatage & Style | ✅ Terminé |
 | P6 | Fonctionnalités avancées | 🔲 Backlog |
 
 ---
