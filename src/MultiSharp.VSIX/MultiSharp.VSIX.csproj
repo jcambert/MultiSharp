@@ -14,10 +14,15 @@
     <UseCodebase>true</UseCodebase>
     <Nullable>enable</Nullable>
     <LangVersion>latest</LangVersion>
+    <UseWpf>true</UseWpf>
   </PropertyGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\MultiSharp.Core\MultiSharp.Core.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Reference Include="System.Design" />
   </ItemGroup>
 
   <ItemGroup>

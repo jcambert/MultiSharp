@@ -1,0 +1,64 @@
+<UserControl x:Class="MultiSharp.ToolWindows.MultiSharpIssuesControl"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             mc:Ignorable="d"
+             d:DesignHeight="300" d:DesignWidth="800">
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+
+        <!-- Barre de filtres -->
+        <StackPanel Grid.Row="0" Orientation="Horizontal" Margin="4,4,4,2">
+            <TextBlock VerticalAlignment="Center" Margin="0,0,6,0">Filtrer :</TextBlock>
+            <ComboBox x:Name="SeverityFilter" Width="110" Margin="0,0,6,0"
+                      SelectionChanged="OnFilterChanged">
+                <ComboBoxItem Content="Tous" IsSelected="True" Tag="All" />
+                <ComboBoxItem Content="Erreurs" Tag="Error" />
+                <ComboBoxItem Content="Avertissements" Tag="Warning" />
+                <ComboBoxItem Content="Suggestions" Tag="Suggestion" />
+                <ComboBoxItem Content="Infos" Tag="Info" />
+            </ComboBox>
+            <TextBox x:Name="SearchBox" Width="180" Margin="0,0,6,0"
+                     TextChanged="OnFilterChanged"
+                     ToolTip="Rechercher dans les messages, fichiers…" />
+            <Button x:Name="ClearButton" Content="Vider" Padding="6,2"
+                    Click="OnClearClick" />
+        </StackPanel>
+
+        <!-- Liste des problèmes -->
+        <ListView x:Name="IssuesList" Grid.Row="1" Margin="4,2,4,2"
+                  MouseDoubleClick="OnIssueDoubleClick"
+                  SelectionMode="Single">
+            <ListView.View>
+                <GridView>
+                    <GridViewColumn Header="" Width="24">
+                        <GridViewColumn.CellTemplate>
+                            <DataTemplate>
+                                <TextBlock Text="{Binding SeverityIcon}" FontSize="14"
+                                           ToolTip="{Binding Severity}" />
+                            </DataTemplate>
+                        </GridViewColumn.CellTemplate>
+                    </GridViewColumn>
+                    <GridViewColumn Header="Code" DisplayMemberBinding="{Binding RuleId}" Width="80" />
+                    <GridViewColumn Header="Message" DisplayMemberBinding="{Binding Message}" Width="360" />
+                    <GridViewColumn Header="Fichier" DisplayMemberBinding="{Binding ShortFilePath}" Width="180" />
+                    <GridViewColumn Header="Ligne" DisplayMemberBinding="{Binding Line}" Width="50" />
+                    <GridViewColumn Header="Projet" DisplayMemberBinding="{Binding ProjectName}" Width="120" />
+                </GridView>
+            </ListView.View>
+        </ListView>
+
+        <!-- Barre de statut -->
+        <StatusBar Grid.Row="2">
+            <StatusBarItem>
+                <TextBlock x:Name="StatusText" Text="0 problème(s)" />
+            </StatusBarItem>
+        </StatusBar>
+    </Grid>
+</UserControl>

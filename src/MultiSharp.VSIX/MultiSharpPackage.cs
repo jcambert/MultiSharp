@@ -3,16 +3,15 @@ using System.Runtime.InteropServices;
 using System.Threading;
 using Microsoft.VisualStudio.Shell;
 using MultiSharp.Options;
+using MultiSharp.ToolWindows;
 using Task = System.Threading.Tasks.Task;
 
 namespace MultiSharp
 {
-    /// <summary>
-    /// Point d'entrée de l'extension MultiSharp.
-    /// AsyncPackage permet un chargement asynchrone pour ne pas bloquer le démarrage de VS.
-    /// </summary>
     [PackageRegistration(UseManagedResourcesOnly = true, AllowsBackgroundLoading = true)]
     [Guid(PackageGuidString)]
+    [ProvideToolWindow(typeof(MultiSharpIssuesWindow))]
+    [ProvideMenuResource("Menus.ctmenu", 1)]
     [ProvideOptionPage(
         typeof(MultiSharpOptions),
         categoryName: "MultiSharp",
@@ -24,18 +23,25 @@ namespace MultiSharp
     {
         public const string PackageGuidString = "a1b2c3d4-e5f6-7890-abcd-ef1234567890";
 
-        /// <summary>
-        /// Accès aux options de l'extension depuis n'importe où dans le package.
-        /// </summary>
         public MultiSharpOptions Options =>
             (MultiSharpOptions)GetDialogPage(typeof(MultiSharpOptions));
 
         protected override async Task InitializeAsync(CancellationToken cancellationToken, IProgress<ServiceProgressData> progress)
         {
             await base.InitializeAsync(cancellationToken, progress);
-
-            // Retour sur le thread UI pour l'initialisation des services VS
             await JoinableTaskFactory.SwitchToMainThreadAsync(cancellationToken);
+
+            await ShowIssuesWindowCommand.InitializeAsync(this);
+        }
+
+        /// <summary>Ouvre ou active le Tool Window MultiSharp Issues.</summary>
+        public async Task ShowIssuesWindowAsync()
+        {
+            await JoinableTaskFactory.SwitchToMainThreadAsync();
+            var window = await FindToolWindowAsync(
+                typeof(MultiSharpIssuesWindow), id: 0, create: true, cancellationToken: default);
+            (window?.Frame as Microsoft.VisualStudio.Shell.Interop.IVsWindowFrame)
+                ?.Show();
         }
     }
 }
