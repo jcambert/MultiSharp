@@ -560,12 +560,12 @@ Tout s'exécute dans le process Visual Studio. Les projets analysés n'ont aucun
 | US-002 | Roslyn workspace | P0 | 🔲 |
 | US-003 | Options & Config | P0 | 🔲 |
 | US-004 | Tool Window Issues | P0 | 🔲 |
-| US-101 | Variables inutilisées | P1 | 🔲 |
-| US-102 | Membres privés inutilisés | P1 | 🔲 |
-| US-103 | Null reference analysis | P1 | 🔲 |
-| US-104 | Simplifications expressions | P1 | 🔲 |
-| US-105 | Using manquants/inutiles | P1 | 🔲 |
-| US-106 | Code smells SOLID | P1 | 🔲 |
+| US-101 | Variables inutilisées | P1 | ✅ |
+| US-102 | Membres privés inutilisés | P1 | ✅ |
+| US-103 | Null reference analysis | P1 | ✅ |
+| US-104 | Simplifications expressions | P1 | ✅ |
+| US-105 | Using manquants/inutiles | P1 | ✅ |
+| US-106 | Code smells SOLID | P1 | ✅ |
 | US-201 | Rename | P2 | 🔲 |
 | US-202 | Extract Method | P2 | 🔲 |
 | US-203 | Extract Interface | P2 | 🔲 |
