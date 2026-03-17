@@ -58,6 +58,79 @@ dotnet test tests/MultiSharp.Tests/MultiSharp.Tests.csproj
 
 ---
 
+## Déboguer avec l'instance expérimentale de Visual Studio
+
+L'instance expérimentale est une installation VS isolée dédiée aux développeurs d'extensions. Elle charge le `.vsix` sans toucher à votre VS principal.
+
+### 1. Configurer le projet de démarrage
+
+Dans Visual Studio, faites un clic droit sur **MultiSharp.VSIX** → **Définir comme projet de démarrage**.
+
+Vérifiez ensuite les propriétés de débogage du projet VSIX :
+
+- Clic droit sur **MultiSharp.VSIX** → **Propriétés** → onglet **Déboguer**
+- **Action de démarrage** : `Démarrer le programme externe`
+- **Programme** :
+  ```
+  C:\Program Files\Microsoft Visual Studio\2022\Professional\Common7\IDE\devenv.exe
+  ```
+  *(adapter selon votre édition : Community / Professional / Enterprise)*
+- **Arguments de la ligne de commande** :
+  ```
+  /rootsuffix Exp
+  ```
+
+### 2. Lancer le débogage
+
+Appuyez sur **F5**. Visual Studio :
+
+1. Compile le projet VSIX
+2. Installe l'extension dans l'instance expérimentale (`%LOCALAPPDATA%\Microsoft\VisualStudio\17.0_<id>Exp`)
+3. Lance une nouvelle fenêtre VS avec le titre **"Microsoft Visual Studio (Experimental Instance)"**
+
+Vous pouvez placer des points d'arrêt dans `MultiSharp.Core` ou `MultiSharp.VSIX` — ils s'activeront dès que VS exécutera le code de l'extension.
+
+### 3. Réinitialiser l'instance expérimentale
+
+Si l'instance expérimentale est dans un état incohérent :
+
+```bash
+# Via le menu Démarrer → "Reset the Visual Studio 2022 Experimental Instance"
+# Ou en ligne de commande :
+"C:\Program Files\Microsoft Visual Studio\2022\Professional\VSSDK\VisualStudioIntegration\Tools\Bin\CreateExpInstance.exe" /Reset /VSInstance=17.0 /RootSuffix=Exp
+```
+
+### 4. Afficher les traces de débogage
+
+Pour voir les messages `Debug.WriteLine` de l'extension dans la fenêtre **Sortie** :
+
+```csharp
+// Dans votre code VSIX
+System.Diagnostics.Debug.WriteLine("[MultiSharp] Message de diagnostic");
+```
+
+Ouvrez **Affichage → Sortie** et sélectionnez **Débogage** dans la liste déroulante.
+
+### 5. Journal d'activité VS
+
+VS écrit un journal XML utile pour diagnostiquer les erreurs MEF ou de chargement d'extension :
+
+```
+%APPDATA%\Microsoft\VisualStudio\17.0_<id>Exp\ActivityLog.xml
+```
+
+Ouvrir ce fichier dans un navigateur affiche les erreurs de chargement de packages et d'extensions.
+
+### 6. Inspecter les erreurs MEF
+
+Si un `[Export]` ou `[Import]` MEF ne fonctionne pas :
+
+**Outils → Options → Environnement → Général** → cocher **"Afficher les erreurs MEF dans le journal d'activité"**
+
+Ou via le menu **Extensions → MultiSharp** → vérifier que les commandes apparaissent.
+
+---
+
 ## Avancement
 
 | Phase | Contenu | Statut |
