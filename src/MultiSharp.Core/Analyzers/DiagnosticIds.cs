@@ -22,5 +22,13 @@ namespace MultiSharp.Analyzers
         public const string NamingPrivateField     = "MS0504";
         public const string UseVarKeyword          = "MS0505";
         public const string UseExpressionBody      = "MS0506";
+
+        // P6 — Fonctionnalités avancées
+        public const string AsyncBlockingCall      = "MS0601";
+        public const string AsyncVoidMethod        = "MS0602";
+        public const string AsyncWithoutAwait      = "MS0603";
+        public const string LinqWhereFirst         = "MS0604";
+        public const string LinqCountNotAny        = "MS0605";
+        public const string LinqWhereCount         = "MS0606";
     }
 }
